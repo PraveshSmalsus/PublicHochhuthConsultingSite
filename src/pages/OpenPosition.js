@@ -49,7 +49,7 @@ export default function OpenPosition(props) {
         const eventdata = await getPublicServerData(tableName);
         eventListData = eventdata;
         const updatedHomePageData = SmartPageData.map((smartItem) => {
-            if (smartItem.PageContainers.length > 0) {
+            if (smartItem.PageContainers?.length > 0) {
                 smartItem.PageContainers.forEach((pageItem) => {
                     containerListData.forEach((containerItem) => {
                         if (
@@ -62,7 +62,7 @@ export default function OpenPosition(props) {
                     });
                 });
             }
-            if (smartItem.SectionPart.length > 0) {
+            if (smartItem.SectionPart?.length > 0) {
                 smartItem.SectionPart[0].SectionDesc = [];
                 smartItem.SectionPart[0].AdditionalContentSource
                     .forEach((section) => {
@@ -94,8 +94,8 @@ export default function OpenPosition(props) {
 						<div className="vacancydetail-desc" ng-bind-html="Vacancies[0].Description | trustedHTML">
 							<div className="ExternalClass7030A43113E14C2590231703696A4B1B">
                             {homePageData.map((smartItem, index) => (
-                                        smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
-                                            section.SectionDesc.length > 0 && section.SectionDesc.map((eventItem, eventIndex) => (
+                                        smartItem.SectionPart?.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
+                                            section.SectionDesc?.length > 0 && section.SectionDesc.map((eventItem, eventIndex) => (
                                                 <div dangerouslySetInnerHTML={{
                                                     __html: eventItem?.Description,
                                                 }}

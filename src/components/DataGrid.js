@@ -12,10 +12,10 @@ const ReadMoreContent = ({ content }) => {
         setIsExpanded(!isExpanded);
     };
 
-    const shortContent = content.length > characterLimit ? content.slice(0, characterLimit) : content;
+    const shortContent = content?.length > characterLimit ? content.slice(0, characterLimit) : content;
 
     useEffect(() => {
-        if (content.length > characterLimit) {
+        if (content?.length > characterLimit) {
             setShowReadMore(true);
         }
     }, [content]);
@@ -80,7 +80,7 @@ export default function DataGrid(props) {
         const eventdata = await getPublicServerData(tableName);
         eventListData = eventdata;
         const updatedHomePageData = SmartPageData.map((smartItem) => {
-            if (smartItem.PageContainers.length > 0) {
+            if (smartItem.PageContainers?.length > 0) {
                 smartItem.PageContainers.forEach((pageItem) => {
                     containerListData.forEach((containerItem) => {
                         if (
@@ -93,7 +93,7 @@ export default function DataGrid(props) {
                     });
                 });
             }
-            if (smartItem.SectionPart.length > 0) {
+            if (smartItem.SectionPart?.length > 0) {
                 smartItem.SectionPart[0].SectionDesc = [];
                 smartItem.SectionPart[0].AdditionalContentSource
                     .forEach((section) => {
@@ -120,7 +120,7 @@ export default function DataGrid(props) {
                         <div className="container clearfix">
                             <div className="heading-block center">
                                 {homePageData.map((smartItem, index) => (
-                                    smartItem.SectionPart.length > 0 && (
+                                    smartItem.SectionPart?.length > 0 && (
                                         <div key={index}>
                                             {smartItem.SectionPart.map((section, secIndex) => (
                                                 <div key={secIndex}>
@@ -174,7 +174,7 @@ export default function DataGrid(props) {
                         <div className="container clearfix">
                             <div className="heading-block center bottommargin-lg">
                                 {homePageData.map((smartItem, index) => (
-                                    smartItem.SectionPart.length > 0 && (
+                                    smartItem.SectionPart?.length > 0 && (
                                         <div key={index}>
                                             {smartItem.SectionPart.map((section, secIndex) => (
                                                 <div key={secIndex}>
@@ -192,8 +192,8 @@ export default function DataGrid(props) {
                             <div className="clearfix">
                                 <div className="row col-mb-50 mb-0">
                                     {homePageData.map((smartItem, index) => (
-                                        smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
-                                            section.SectionDesc.length > 0 && section.SectionDesc.map((eventItem, eventIndex) => (
+                                        smartItem.SectionPart?.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
+                                            section.SectionDesc?.length > 0 && section.SectionDesc.map((eventItem, eventIndex) => (
                                                 <div
                                                     key={eventIndex}
                                                     className="col-sm-12 col-md-6 col-lg-6 d-flex"
