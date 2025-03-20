@@ -108,7 +108,7 @@ export default function TeamCard(props) {
                                                 <div key={teamIndex} className="col-sm-12 col-md-6 col-lg-4 d-flex">
                                                     <div className="founder-box d-flex flex-column">
                                                         <div className="founder-upper-box text-center">
-                                                            <img src="images/New_candidate.svg" alt="" />
+                                                            <img src={teamItem.ImageLink} alt="" />
                                                         </div>
                                                         <div className="founder-description">
                                                             <h3 className="founder-title">{teamItem.Title}</h3>
