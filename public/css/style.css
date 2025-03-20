@@ -5829,12 +5829,17 @@ line-height: 140%;
 letter-spacing: 0.96px;
 text-transform: uppercase;
 }
-.mainpage .slider-caption h2 {
-font-size: 80px;
-}
-.mainpage .slider-caption p {
+
+section#slider.min-vh-100 > #home .slider-caption.slider-caption-center > p {
 	font-size: 28px;
 	}
+	section#slider.min-vh-100 > #home .slider-caption.slider-caption-center > h2 {
+		font-size: 80px;
+	}
+	#home .slider-caption.slider-caption-center {
+		max-width: 780px;
+	}
+	
 .slider-caption p {
 	color: #FFF;
 text-align: center;

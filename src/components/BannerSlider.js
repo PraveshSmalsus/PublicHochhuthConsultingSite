@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getPublicServerData } from '../Service/GetDataApi';
 import * as CommonFunctions from '../Service/CommonFunctions';
 import { HashLink } from "react-router-hash-link";
-
+import 'animate.css';
 let containerListData = []
 export default function BannerSlider(props) {
   const ContainerTitle = props.ContainerTitle
@@ -38,11 +38,10 @@ export default function BannerSlider(props) {
         <div id={id} key={index} className="slider-inner">
           <div className="container">
             <div className="slider-caption slider-caption-center">
-              <h2 className="fadeInDown animated" data-animate="fadeInDown">
+              <h2 className="animate__animated animate__fadeInDown">
                 {item.Heading}
               </h2>
-  
-              <div dangerouslySetInnerHTML={{ __html: item.SubHeading }} />
+              <p className='animate__animated animate__fadeInUp' dangerouslySetInnerHTML={{ __html: item.SubHeading }} />
               {item.ComponentConfiguration && item.ComponentConfiguration.length > 0 && item.ComponentConfiguration.map((itemcomp, index) => (
                 itemcomp.ComponentName && (
                   <div key={index} className="text-center mt-0 mt-md-4">

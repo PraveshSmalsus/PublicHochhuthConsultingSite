@@ -209,7 +209,8 @@ let SliderSection = []
                           <div className="heading-block">
                             <h4 className="text-uppercase">{item?.Title}</h4>
                           </div>
-                          <ReadMoreContent content={item?.ItemDescription} />
+                          <p dangerouslySetInnerHTML={{__html:item.Description}}></p>
+                          {/* <ReadMoreContent content={item?.ItemDescription} /> */}
                         </div>
                         <div className="col-lg-4 col-sm-5">
                           <img
