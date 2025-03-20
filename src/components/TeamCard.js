@@ -145,9 +145,9 @@ export default function TeamCard(props) {
                             <div className="col-sm-12 col-md-12 col-lg-12 topmargin pl-0 pr-0 pt-4">
                                 <div className="founder-box">
                                     <div className="founder-upper-box text-center">
-                                        <img src="images/stefan.jpg" alt="founderimg" />
+                                        <img src="images/stefan.png" alt="founderimg" />
                                     </div>
-                                    <div className="founder-description">
+                                   
                                         {homePageData.map((smartItem, index) => (
                                             smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
                                                 section.SectionDesc.length > 0 && (
@@ -155,7 +155,9 @@ export default function TeamCard(props) {
                                                         .sort((a, b) => a.SortOrder - b.SortOrder) // Sorting by SortOrder (ascending order)
                                                         .map((teamItem, teamIndex) => (
                                                             <>
-                                                                <h3 className="founder-title" key={teamIndex}>{teamItem.Title} </h3><p className="founder-subtitle">
+                                                             <div className="founder-description">
+                                                                <h3 className="founder-title" key={teamIndex}>{teamItem.Title} </h3>
+                                                                <p className="founder-subtitle">
                                                                     {teamItem.Designation}
                                                                 </p>
                                                                 <div className="d-flex justify-content-center social-icons">
@@ -173,6 +175,7 @@ export default function TeamCard(props) {
                                                                         <i className="icon-email3"></i>
                                                                         <i className="icon-email3"></i>
                                                                     </a>
+                                                                </div>
                                                                 </div>
                                                                 <p className="founder-desc-text">{teamItem.About}</p>
                                                                 <div className="">
@@ -192,7 +195,6 @@ export default function TeamCard(props) {
                                                 )
                                             ))
                                         ))}
-                                    </div>
                                 </div>
                             </div>
                         </div>

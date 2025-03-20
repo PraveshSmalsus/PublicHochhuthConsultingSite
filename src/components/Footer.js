@@ -82,7 +82,7 @@ export default function Footer() {
               <Link to="/impress">Impress</Link>
             </div>
             <div className="col-md-4 d-flex justify-content-center">
-              © 2024 by Hochhuth Consulting GmbH
+              © 2025 by Hochhuth Consulting GmbH
             </div>
           </div>
         </div>
