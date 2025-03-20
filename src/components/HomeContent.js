@@ -84,12 +84,17 @@ export default function HomeContent(props) {
         smartItem.PageContainers.forEach((pageItem) => {
           containerdata.forEach((containerItem) => {
             if (containerItem.id == pageItem.Id) {
-              smartItem.SectionPart.push(containerItem);
+              // Check if the containerItem already exists in SectionPart based on a unique identifier (e.g., containerItem.id)
+              const alreadyAdded = smartItem.SectionPart.some(item => item.id == containerItem.id);
+              if (!alreadyAdded) {
+                smartItem.SectionPart.push(containerItem);
+              }
             }
           });
         });
       }
     });
+    
 
     console.log(containerListData);
     setHomePageData(HomePageData); // Update the state to trigger re-render

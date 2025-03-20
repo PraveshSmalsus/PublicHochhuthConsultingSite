@@ -82,12 +82,29 @@ export default function SmartPageContainer(props) {
         smartItem.PageContainers.forEach((pageItem) => {
           containerdata.forEach((containerItem) => {
             if (containerItem.id == pageItem.Id) {
-              smartItem.SectionPart.push(containerItem);
+              // Check if the containerItem already exists in SectionPart based on a unique identifier (containerItem.id)
+              const alreadyAdded = smartItem.SectionPart.some(item => item.id === containerItem.id);
+              
+              if (!alreadyAdded) {
+                smartItem.SectionPart.push(containerItem);
+              }
             }
           });
         });
       }
     });
+    
+    // SmartPageContainerData.map((smartItem) => {
+    //   if (smartItem.PageContainers?.length > 0) {
+    //     smartItem.PageContainers.forEach((pageItem) => {
+    //       containerdata.forEach((containerItem) => {
+    //         if (containerItem.id == pageItem.Id) {
+    //           smartItem.SectionPart.push(containerItem);
+    //         }
+    //       });
+    //     });
+    //   }
+    // });
 
     console.log(containerListData);
     setSmartPageContainer(SmartPageContainerData); // Update the state to trigger re-render
