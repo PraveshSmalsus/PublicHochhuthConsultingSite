@@ -151,7 +151,8 @@ export default function DataGrid(props) {
                                                                         {Title}
                                                                     </a>
                                                                 </h3>
-                                                                <ReadMoreContent content={Description} />
+                                                                <p dangerouslySetInnerHTML={{__html:Description}}></p>
+                                                                {/* <ReadMoreContent content={Description} /> */}
                                                             </div>
                                                         </div>
                                                     </div>
