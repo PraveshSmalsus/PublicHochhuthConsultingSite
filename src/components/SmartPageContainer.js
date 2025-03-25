@@ -45,7 +45,7 @@ export default function SmartPageContainer(props) {
 
   useEffect(() => {
     GetAllSmartMetaData('SmartMetaData');
-  }, []);
+  }, [PageTitle])
 
   const GetAllSmartMetaData = async (tableName) => {
     const smartdata = await getPublicServerData(tableName);

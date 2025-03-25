@@ -140,6 +140,19 @@ export default function TeamCard(props) {
                 className="page-section section bg-transparent m-0"
             >
                 <div className="container clearfix">
+                    {homePageData.map((smartItem, index) => (
+                        smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
+                            <><div class="heading-block center">
+                                <h2>{section.Heading}</h2>
+                                <span>{section.SubHeading}</span>
+                            </div><div class="row justify-content-center mb-0">
+                                    <div class="col-md-8 bottommargin">
+                                        <div class="border-bottom-0 text-justify bottommargin">
+                                            <div dangerouslySetInnerHTML={{ __html: section.Description }} />
+                                        </div>
+                                    </div>
+                                </div></>
+                        ))))}
                     <div className="row justify-content-center mb-0">
                         <div className="col-md-8 bottommargin">
                             <div className="col-sm-12 col-md-12 col-lg-12 topmargin pl-0 pr-0 pt-4">
@@ -147,15 +160,15 @@ export default function TeamCard(props) {
                                     <div className="founder-upper-box text-center">
                                         <img src="images/stefan.png" alt="founderimg" />
                                     </div>
-                                   
-                                        {homePageData.map((smartItem, index) => (
-                                            smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
-                                                section.SectionDesc.length > 0 && (
-                                                    section.SectionDesc
-                                                        .sort((a, b) => a.SortOrder - b.SortOrder) // Sorting by SortOrder (ascending order)
-                                                        .map((teamItem, teamIndex) => (
-                                                            <>
-                                                             <div className="founder-description">
+
+                                    {homePageData.map((smartItem, index) => (
+                                        smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
+                                            section.SectionDesc.length > 0 && (
+                                                section.SectionDesc
+                                                    .sort((a, b) => a.SortOrder - b.SortOrder) // Sorting by SortOrder (ascending order)
+                                                    .map((teamItem, teamIndex) => (
+                                                        <>
+                                                            <div className="founder-description">
                                                                 <h3 className="founder-title" key={teamIndex}>{teamItem.Title} </h3>
                                                                 <p className="founder-subtitle">
                                                                     {teamItem.Designation}
@@ -176,25 +189,25 @@ export default function TeamCard(props) {
                                                                         <i className="icon-email3"></i>
                                                                     </a>
                                                                 </div>
-                                                                </div>
-                                                                <p className="founder-desc-text">{teamItem.About}</p>
-                                                                <div className="">
-                                                                    <div className="text-end founder-check-position-btn">
-                                                                        <div className="card-box-actionBtn">
-                                                                            <a
-                                                                                href="/careers#section-team"
-                                                                                className="button button-border button-rounded button-fill fill-from-right button-blue"
-                                                                            >
-                                                                                <span>Meet the Team</span>
-                                                                            </a>
-                                                                        </div>
+                                                            </div>
+                                                            <p className="founder-desc-text">{teamItem.About}</p>
+                                                            <div className="">
+                                                                <div className="text-end founder-check-position-btn">
+                                                                    <div className="card-box-actionBtn">
+                                                                        <a
+                                                                            href="/careers#section-team"
+                                                                            className="button button-border button-rounded button-fill fill-from-right button-blue"
+                                                                        >
+                                                                            <span>Meet the Team</span>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
-                                                            </>
-                                                        ))
-                                                )
-                                            ))
-                                        ))}
+                                                            </div>
+                                                        </>
+                                                    ))
+                                            )
+                                        ))
+                                    ))}
                                 </div>
                             </div>
                         </div>

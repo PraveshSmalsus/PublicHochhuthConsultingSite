@@ -41,7 +41,7 @@ export default function Footer() {
                     <i className="icon-facebook"></i>
                   </a>
                   <a
-                    href="h"
+                    href="https://www.linkedin.com/company/hochhuth-consulting"
                     className="social-icon si-small si-borderless si-linkedin"
                   >
                     <i className="icon-linkedin"></i>

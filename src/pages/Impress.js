@@ -7,20 +7,6 @@ import Footer from "../components/Footer";
 export default function Impress() {
   const [content, setContent] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://argosmob.uk/api-random/getImpressData.php")
-      .then((response) => {
-        if (response?.data?.success) {
-          setContent(response?.data?.data?.Description);
-        } else {
-          console.log(response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching the navigation data:", error);
-      });
-  }, []);
   return (
     <div id="wrapper" className="clearfix">
       <Navbar />

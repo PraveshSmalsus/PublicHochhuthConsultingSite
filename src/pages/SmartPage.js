@@ -10,7 +10,7 @@ let allData = []
 
 export default function SmartPage() {
   const [smartPageContent, setSmartPageContent] = useState({});
-  const location = useLocation();  // Use the useLocation hook to get the current path
+  const location = useLocation();  
 
   // The pathname is updated when the location changes
   const pathname = location.pathname;
@@ -46,7 +46,6 @@ export default function SmartPage() {
 
   return (
     <div id="wrapper" className="clearfix">
-      <Navbar />
       <section id="content" className="pt-4">
         <div className="content-wrap">
           <section className="page-section mt-0 section bg-transparent pt-0">
@@ -61,7 +60,6 @@ export default function SmartPage() {
           </section>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -19,7 +19,7 @@ export default function BannerSlider(props) {
     const updatedContainerData = await Promise.all(
       containerdata.map(async (item) => {
         item.ComponentConfiguration = await CommonFunctions.parseJson(item.ComponentConfiguration);
-        if (item.Title.toLowerCase() === ContainerTitle.toLowerCase()) {
+        if (item.Title.toLowerCase() === ContainerTitle?.toLowerCase()) {
           return item;  // Return the item if it matches
         }
         return null;  // Return null if it doesn't match

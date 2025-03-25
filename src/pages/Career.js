@@ -13,17 +13,7 @@ export default function Career() {
     <div id="wrapper" className="clearfix">
       <Navbar />
       <BannerSlider PageTitle={'Careers'} ContainerTitle={'Career Home'} id="careers" urlRoute = {"/careers#section-positions"}/>
-      {/* <BannerSlider
-        id="careers"
-        heading="We look forward to meeting you!
-        Let's grow together"
-        subheading="As a fast-growing company, we are constantly looking for new talents to join our team. Opportunities to work with us are diverse, ranging from project-based work to full-time positions. We also welcome unsolicited applications from suitable applicants."
-        btn={{
-          text: "CHECK OPEN POSITIONS",
-          urlRoute: "/careers#section-positions",
-        }}
-      /> */}
-      <div id="page-menu" class="dots-menu dots-menu-border">
+      {/* <div id="page-menu" class="dots-menu dots-menu-border">
         <div id="page-menu-wrap">
           <div class="container">
             <div class="page-menu-row">
@@ -63,7 +53,7 @@ export default function Career() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <SmartPageContainer id="career" PageTitle={'Careers'} />
       <Footer />
     </div>
