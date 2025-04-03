@@ -157,9 +157,21 @@ export default function TeamCard(props) {
                         <div className="col-md-8 bottommargin">
                             <div className="col-sm-12 col-md-12 col-lg-12 topmargin pl-0 pr-0 pt-4">
                                 <div className="founder-box">
-                                    <div className="founder-upper-box text-center">
-                                        <img src="images/stefan.png" alt="founderimg" />
-                                    </div>
+                                    {homePageData.map((smartItem, index) => (
+                                        smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
+                                            section.SectionDesc.length > 0 && (
+                                                section.SectionDesc
+                                                    .sort((a, b) => a.SortOrder - b.SortOrder) // Sorting by SortOrder (ascending order)
+                                                    .map((teamItem, teamIndex) => (
+                                                        <>
+                                                            <div className="founder-upper-box text-center">
+                                                                <img src={teamItem.ImageLink} alt="founderimg" />
+                                                            </div>
+                                                        </>
+                                                    ))
+                                            )
+                                        ))
+                                    ))}
 
                                     {homePageData.map((smartItem, index) => (
                                         smartItem.SectionPart.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
@@ -190,7 +202,7 @@ export default function TeamCard(props) {
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                            <p className="founder-desc-text">{teamItem.About}</p>
+                                                            <p className="founder-desc-text" dangerouslySetInnerHTML={{ __html: teamItem.About }} ></p>
                                                             <div className="">
                                                                 <div className="text-end founder-check-position-btn">
                                                                     <div className="card-box-actionBtn">

@@ -100,6 +100,7 @@ export default function DataGrid(props) {
                         section.SectionDesc = [];
                         eventListData.forEach((eventItem) => {
                             if (section.Id == eventItem.id) {
+                                eventItem.hrefTitle= eventItem.Title.replace(/\s+/g, '-').toLowerCase();
                                 smartItem.SectionPart[0].SectionDesc.push(eventItem);
                             }
                         });
@@ -206,11 +207,11 @@ export default function DataGrid(props) {
                                                             </div>
                                                             <div
                                                                 className="card-box-desc"
-                                                            ><ReadMoreContent content={eventItem?.Description} /></div>
+                                                            ><ReadMoreContent content={eventItem?.ShortDescription} /></div>
                                                         </div>
                                                         <div className="card-box-actionBtn">
                                                             <Link
-                                                                to={`/OpenPosition/${eventItem?.Title}`}
+                                                                to={`/SmartPage/${eventItem?.hrefTitle}`}
                                                                 className="button button-border button-rounded button-fill fill-from-right button-blue"
                                                             >
                                                                 <span>READ MORE</span>

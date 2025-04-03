@@ -120,7 +120,7 @@ export default function FullContainer(props) {
                                 </>;
                             })}
                             <a
-                                href="mailto:info@hochhuth-consulting.de"
+                                href="/contact"
                                 className="mt-4 button button-border button-rounded button-fill fill-from-right button-blue"
                             >
                                 <span>Contact</span>

@@ -13,6 +13,7 @@ import SmartPageContainer from "../components/SmartPageContainer";
 let pageFlag;
 export default function Home(props) {
   const PageTitle = props.Title;
+  
 
   // State variables to store fetched data
   const [smartPageData, setSmartPageData] = useState([]);
