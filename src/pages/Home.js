@@ -9,6 +9,7 @@ import * as CommonFunctions from '../Service/CommonFunctions';
 import { getPublicServerData } from '../Service/GetDataApi';
 import SmartPage from './SmartPage';
 import SmartPageContainer from "../components/SmartPageContainer";
+import { Helmet } from 'react-helmet';
 
 let pageFlag;
 export default function Home(props) {
@@ -97,11 +98,29 @@ export default function Home(props) {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Or some loading spinner
+    return <div></div>; // Or some loading spinner
   }
 
   return (
     <div id="wrapper" className="clearfix">
+    <Helmet>
+<title>Hochhuth Consulting - Experts in Digital Transformation and Business Consulting</title>
+<meta name="description" content="Hochhuth Consulting specializes in digital transformation, agile project management, and business consulting. Partner with us to achieve your business goals." />
+<meta name="keywords" content="Hochhuth Consulting, digital transformation, business consulting, project management, IT consulting, agile consulting, business transformation, governance consulting" />
+<meta name="author" content="Hochhuth Consulting" />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
+<meta property="og:description" content="Partner with Hochhuth Consulting for expert solutions in digital transformation, project management, and business consulting." />
+<meta property="og:image" content="https://hochhuth-consulting.de/images/hochhuth-banner.jpg" />
+<meta property="og:url" content="https://hochhuth-consulting.de/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Hochhuth Consulting" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
+<meta name="twitter:description" content="Discover how Hochhuth Consulting can help your business thrive with expert consulting services in digital transformation and project management." />
+<meta name="twitter:image" content="https://hochhuth-consulting.de/images/hochhuth-banner.jpg" />
+<link rel="canonical" href="https://hochhuth-consulting.de/" />
+    </Helmet>
       <Navbar />
       {containerNottag ? (
         <><BannerSlider
