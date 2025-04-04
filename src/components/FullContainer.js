@@ -61,10 +61,10 @@ export default function FullContainer(props) {
                             <div className="row col-mb-50">
                                 <div className="col-sm-12 col-md-4 col-lg-5">
                                     <div className="benefit-img1">
-                                        <img src="images/benefit-img1.png" alt="" />
+                                        <img src="https://hochhuth-consulting.de/images/benefit-img1.png" alt="" />
                                     </div>
                                     <div className="benefit-img1 upper-benefit-img">
-                                        <img src="images/benefit-img2.jpg" alt="" />
+                                        <img src="https://hochhuth-consulting.de/images/benefit-img2.jpg" alt="" />
                                     </div>
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-7">
