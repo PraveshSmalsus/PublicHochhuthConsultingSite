@@ -19,11 +19,12 @@
     <title>Hochhuth Consulting GmbH</title>
     <!-- Matomo -->
     <script defer src="https://cdn.kiprotect.com/klaro/latest/klaro.js"></script>
-<script>
+<!-- <script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['requireCookieConsent']);
   _paq.push(["setCookieDomain", "*.hochhuth-consulting.de"]);
-  _paq.push(["setDomains", ["*.hochhuth-consulting.de"]]);
+  // _paq.push(["setDomains", ["*.hochhuth-consulting.de"]]);
   _paq.push(['enableCrossDomainlinking']);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
@@ -34,12 +35,12 @@
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
-</script>
+</script> -->
 <!-- <script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['requireCookieConsent']);
-  _paq.push(['setCookieDomain',"*.hochhuth-consulting.de"])
+  _paq.push(['setCookieDomain', ".hochhuth-consulting.de"]);
   _paq.push(['enableCrossDomainLinking']);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
@@ -51,6 +52,26 @@
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
  </script> -->
+ <script>
+  var _paq = window._paq = window._paq || [];
+
+  _paq.push(['requireCookieConsent']);
+  //_paq.push(['rememberCookieConsentGiven']); // TEMP for testing
+
+  _paq.push(['setCookieDomain', ".hochhuth-consulting.de"]); // ✅ no *
+
+  _paq.push(['enableCrossDomainLinking']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+
+  (function() {
+    var u="//gruene-weltweit.de/matomo/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '4']); // ✅ your actual site ID
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
 <!-- End Matomo Code -->
 
   </head>
