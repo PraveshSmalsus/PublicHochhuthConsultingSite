@@ -16,6 +16,11 @@ const ReadMoreContent = ({ content }) => {
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
+
+  function formatTitle(text) {
+    return text.replace(/-/g, ' ');
+  }
+
   const shortContent = content.length > characterLimit ? content.slice(0, characterLimit) : content;
   useEffect(() => {
     if (content.length > characterLimit) {
@@ -47,13 +52,17 @@ export default function SmartPageContainer(props) {
     GetAllSmartMetaData('SmartMetaData');
   }, [PageTitle])
 
+  function formatTitle(text) {
+    return text.replace(/-/g, ' ');
+  }
+  
   const GetAllSmartMetaData = async (tableName) => {
     const smartdata = await getPublicServerData(tableName);
     smartMetaDataItem = await Promise.all(
       smartdata.map(async (item) => {
         item.SectionPart = [];
         item.PageContainers = await CommonFunctions.parseJson(item.PageContainers);
-        if (item.Title.toLowerCase() == PageTitle.toLowerCase()) {
+        if (item.Title.toLowerCase() == formatTitle(PageTitle).toLowerCase()) {
           return item;  // Return the item if it matches
         }
         return null;  // Return null if it doesn't match
@@ -84,7 +93,7 @@ export default function SmartPageContainer(props) {
             if (containerItem.id == pageItem.Id) {
               // Check if the containerItem already exists in SectionPart based on a unique identifier (containerItem.id)
               const alreadyAdded = smartItem.SectionPart.some(item => item.id === containerItem.id);
-              
+
               if (!alreadyAdded) {
                 smartItem.SectionPart.push(containerItem);
               }
@@ -93,7 +102,7 @@ export default function SmartPageContainer(props) {
         });
       }
     });
-    
+
     // SmartPageContainerData.map((smartItem) => {
     //   if (smartItem.PageContainers?.length > 0) {
     //     smartItem.PageContainers.forEach((pageItem) => {

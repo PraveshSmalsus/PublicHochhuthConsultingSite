@@ -17,6 +17,9 @@ export default function SmartPage() {
 
   console.log(lastName); // "lastName"
 
+  function formatTitle(text) {
+    return text.replace(/-/g, ' ');
+  }
   useEffect(() => {
     const GetAllSmartMetaData = async (tableName) => {
       const smartdata = await getPublicServerData(tableName);
@@ -27,10 +30,13 @@ export default function SmartPage() {
           if (item.Title.toLowerCase().replace(/\s+/g, '') === lastName.toLowerCase().replace(/\s+/g, '')) {
             return item;  // Return the item if it matches
           }
-          return null;  // Return null if it doesn't match
+          if(item?.Title?.toLowerCase() == formatTitle(lastName?.toLowerCase())){
+            return item;
+          }
+          // return null;  // Return null if it doesn't match
         })
       );
-      allData = smartMetaDataItem.filter(item => item !== null);
+      allData = smartMetaDataItem.filter(item => item != null && item != undefined);
       setSmartPageContent(allData[0]);
       console.log(smartMetaDataItem);
     };
