@@ -1,13 +1,14 @@
 import axios from 'axios';
 const currentPageUrl = window.location.pathname;
 console.log(currentPageUrl)
+const baseUrl = window.location.origin;
 export const getPublicServerData = async (tableName) => {
     let results = [];
     try {
         const payload = {
             table: `${tableName}`
         };
-        const response = await axios.post("https://testing.hochhuth-consulting.de/HHHHPUBLICAPI/getDataAll.php", payload, {
+        const response = await axios.post(`${baseUrl}/HHHHPUBLICAPI/getDataAll.php`, payload, {
             headers: {
                 "Content-Type": "application/json"
             }

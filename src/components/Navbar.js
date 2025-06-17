@@ -3,6 +3,7 @@ import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import { getPublicServerData } from '../Service/GetDataApi'
 export default function Navbar() {
+  const baseUrl = window.location.origin;
   const [scrolled, setScrolled] = useState(false);
   const [navigations, setNavigations] = useState([]);
   const handleScroll = () => {
@@ -48,16 +49,16 @@ export default function Navbar() {
               <Link
                 to="/home"
                 className="standard-logo"
-                data-dark-logo="https://testing.hochhuth-consulting.de/images/logo.png"
+                data-dark-logo={`${baseUrl}/images/logo.png`}
               >
-                <img src="https://testing.hochhuth-consulting.de/images/logo.png" alt="Logo" />
+                <img src={`${baseUrl}/images/logo.png`} alt="Logo" />
               </Link>
               <Link
                 to="/home"
                 className="retina-logo"
-                data-dark-logo="https://testing.hochhuth-consulting.de/images/logo@2x.png"
+                data-dark-logo={`${baseUrl}/images/logo@2x.png`}
               >
-                <img src="https://testing.hochhuth-consulting.de/images/logo@2x.png" alt="Logo" />
+                <img src={`${baseUrl}/images/logo@2x.png`} alt="Logo" />
               </Link>
             </div>
 
@@ -84,7 +85,7 @@ export default function Navbar() {
               </svg>
             </div>
 
-          
+
             <nav className="primary-menu">
               <ul
                 className="menu-container one-page-menu"
@@ -92,11 +93,11 @@ export default function Navbar() {
                 data-speed="1500"
               >
                 {navigations.map((navItem, index) => (
-                  
+
                   <li className="menu-item" key={index}>
                     <HashLink
                       className="menu-link"
-                      to={(navItem.Title==="Careers")?`/careers`:`/home#${toKebabCase(navItem.Title)}`}
+                      to={(navItem.Title === "Careers") ? `/careers` : `/home#${toKebabCase(navItem.Title)}`}
                       data-href={toKebabCase(navItem.Title)}
                     >
                       <div>{navItem.Title}</div>
