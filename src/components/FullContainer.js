@@ -51,7 +51,7 @@ export default function FullContainer(props) {
 
     return (
         <>
-             {
+            {
                 selectedType == 'BackgroundImage' && (<><BannerSlider
                     id={PageTitle}
                     PageTitle={PageTitle}
@@ -71,12 +71,11 @@ export default function FullContainer(props) {
                             </div>
                             <div className="row col-mb-50">
                                 <div className="col-sm-12 col-md-4 col-lg-5">
-                                    <div className="benefit-img1">
-                                        <img src="https://testing.hochhuth-consulting.de/images/benefit-img1.png" alt="" />
-                                    </div>
-                                    <div className="benefit-img1 upper-benefit-img">
-                                        <img src="https://testing.hochhuth-consulting.de/images/benefit-img2.jpg" alt="" />
-                                    </div>
+                                    {FullContanerdata.map((item, index) => (
+                                        <div className="benefit-img1">
+                                            <img src={item.ItemCover} alt="" />
+                                        </div>
+                                    ))}
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-7">
                                     {FullContanerdata.map((item, index) => (

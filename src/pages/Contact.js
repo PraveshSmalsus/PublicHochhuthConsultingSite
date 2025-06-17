@@ -36,7 +36,7 @@ const ContactForm = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { firstName, lastName, country, email, comment } = formData;
-        const url = `https://testing.hochhuth-consulting.de/HHHHPUBLICAPI/insertForm.php`;
+        const url = `/HHHHPUBLICAPI/insertForm.php`;
 
         try {
             const response = await fetch(url, {

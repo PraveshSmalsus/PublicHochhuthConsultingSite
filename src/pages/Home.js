@@ -12,6 +12,7 @@ import SmartPageContainer from "../components/SmartPageContainer";
 import { Helmet } from 'react-helmet';
 
 let pageFlag;
+const baseUrl = window.location.origin;
 export default function Home(props) {
   const PageTitle = props.Title;
   
@@ -113,15 +114,15 @@ export default function Home(props) {
 <meta name="robots" content="index, follow" />
 <meta property="og:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
 <meta property="og:description" content="Partner with Hochhuth Consulting for expert solutions in digital transformation, project management, and business consulting." />
-<meta property="og:image" content="https://testing.hochhuth-consulting.de/images/hochhuth-banner.jpg" />
-<meta property="og:url" content="https://testing.hochhuth-consulting.de/" />
+<meta property="og:image" content={`${baseUrl}/images/hochhuth-banner.jpg`} />
+<meta property="og:url"  content={`${baseUrl}/`} />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Hochhuth Consulting" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
 <meta name="twitter:description" content="Discover how Hochhuth Consulting can help your business thrive with expert consulting services in digital transformation and project management." />
-<meta name="twitter:image" content="https://testing.hochhuth-consulting.de/images/hochhuth-banner.jpg" />
-<link rel="canonical" href="https://testing.hochhuth-consulting.de/" />
+<meta name="twitter:image"  content={`${baseUrl}/images/hochhuth-banner.jpg`} />
+<link rel="canonical" href={baseUrl} />
     </Helmet>
       <Navbar />
       {containerNottag ? (
