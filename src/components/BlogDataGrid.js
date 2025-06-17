@@ -4,10 +4,10 @@ import * as CommonFunctions from '../Service/CommonFunctions';
 import { Link } from 'react-router-dom';
 
 
-export default function TeamCard(props) {
+export default function BlogDataGrid(props) {
     let SmartPageData = []
     let containerListData = []
-    let teamListData = []
+    let eventListData = []
     const GridTitle = props.ContainerTitle
     const PageTitle = props.PageTitle
     const selectedType = props.selectedType;
@@ -29,7 +29,6 @@ export default function TeamCard(props) {
                     return item;  // Return the item if it matches
                 }
                 return null;  // Return null if it doesn't match
-
             })
         );
         SmartPageData = updatedSmartData.filter(item => item !== null);
@@ -40,21 +39,20 @@ export default function TeamCard(props) {
         const containerdata = await getPublicServerData(tableName);
         const updatedContainerData = await Promise.all(
             containerdata.map(async (item) => {
-                item.TeamInformation = await CommonFunctions.parseJson(item.TeamInformation);
+                item.AdditionalContentSource = await CommonFunctions.parseJson(item.AdditionalContentSource);
                 item.ComponentConfiguration = await CommonFunctions.parseJson(item?.ComponentConfiguration);
                 return item;
             })
         );
         containerListData = updatedContainerData;
-        GetAllTeamDetailListData('TeamDetails');
+        GetAllEventListData('Events');
     };
 
-    const GetAllTeamDetailListData = async (tableName) => {
-        const teamdata = await getPublicServerData(tableName);
-        teamListData = teamdata;
-
-        const updatedCareerPageData = SmartPageData.map((smartItem) => {
-            if (smartItem.PageContainers.length > 0) {
+    const GetAllEventListData = async (tableName) => {
+        const eventdata = await getPublicServerData(tableName);
+        eventListData = eventdata;
+        const updatedHomePageData = SmartPageData.map((smartItem) => {
+            if (smartItem.PageContainers?.length > 0) {
                 smartItem.PageContainers.forEach((pageItem) => {
                     containerListData.forEach((containerItem) => {
                         if (
@@ -67,27 +65,31 @@ export default function TeamCard(props) {
                     });
                 });
             }
-            if (smartItem.SectionPart.length > 0) {
+            if (smartItem.SectionPart?.length > 0) {
                 smartItem.SectionPart[0].SectionDesc = [];
-                smartItem.SectionPart[0].TeamInformation
+                smartItem.SectionPart[0].AdditionalContentSource
                     .forEach((section) => {
                         section.SectionDesc = [];
-                        teamListData.forEach((teamItem) => {
-                            if (section.Id == teamItem.id) {
-                                smartItem.SectionPart[0].SectionDesc.push(teamItem);
+                        eventListData.forEach(async (eventItem) => {
+                            eventItem.ComponentConfiguration = await CommonFunctions.parseJson(eventItem?.ComponentConfiguration);
+                            if (section.Id == eventItem.id) {
+                                eventItem.hrefTitle = eventItem.Title.replace(/\s+/g, '-').toLowerCase();
+                                smartItem.SectionPart[0].SectionDesc.push(eventItem);
                             }
                         });
                     });
             }
+
             return smartItem;
         });
-        setHomePageData(updatedCareerPageData)
-        console.log(updatedCareerPageData);
+
+        setHomePageData(updatedHomePageData)
+        console.log(updatedHomePageData)
     };
 
     return (
         <>
-            {selectedType === 'CardGrid-1' && Title == 'TeamDataGrid' && (
+            {selectedType === 'CardGrid-1' && Title == 'BlogDataGrid' && (
                 <section id="who-we-are" className="page-section section bg-transparent m-0">
                     <div className="container clearfix">
                         {homePageData?.map((smartItem, index) =>
@@ -121,31 +123,22 @@ export default function TeamCard(props) {
                                                     .sort((a, b) => a.SortOrder - b.SortOrder)
                                                     .map((teamItem, teamIndex) => (
                                                         <React.Fragment key={teamIndex}>
-                                                            <div className="founder-upper-box text-center">
-                                                                <img src={teamItem.ImageLink} alt="founderimg" />
-                                                            </div>
+
                                                             <div className="founder-description">
-                                                                <h3 className="founder-title">{teamItem.Title}</h3>
-                                                                <p className="founder-subtitle">{teamItem.Designation}</p>
-                                                                <div className="d-flex justify-content-center social-icons">
-                                                                    <a href="https://www.linkedin.com" className="social-icon si-small si-borderless si-linkedin">
-                                                                        <i className="icon-linkedin"></i>
-                                                                        <i className="icon-linkedin"></i>
-                                                                    </a>
-                                                                    <a href="mailto:example@example.com" className="social-icon si-small si-borderless si-email3">
-                                                                        <i className="icon-email3"></i>
-                                                                        <i className="icon-email3"></i>
-                                                                    </a>
-                                                                </div>
+                                                                <a href={`/${teamItem.Title}`}>
+                                                                    <h3 className="founder-title">{teamItem.Title}</h3>
+                                                                </a>
+
                                                             </div>
-                                                            <p className="founder-desc-text" dangerouslySetInnerHTML={{ __html: teamItem.About }}></p>
-                                                            <div className="text-end founder-check-position-btn">
+                                                            <p className="founder-desc-text" dangerouslySetInnerHTML={{ __html: teamItem.ShortDescription }}></p>
+                                                            {teamItem.ComponentConfiguration != undefined && teamItem.ComponentConfiguration != null && teamItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
                                                                 <div className="card-box-actionBtn">
-                                                                    <a href="/careers#section-team" className="button button-border button-rounded button-fill fill-from-right button-blue">
-                                                                        <span>Meet the Team</span>
+                                                                <a href={`/SmartPage/${teamItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                        <span>{teamItem.ComponentConfiguration.ComponentName}</span>
                                                                     </a>
                                                                 </div>
                                                             </div>
+                                                            )}
                                                         </React.Fragment>
                                                     ))
                                             )
@@ -157,7 +150,7 @@ export default function TeamCard(props) {
                     </div>
                 </section>
             )}
-            {selectedType === 'CardGrid-2' && Title == 'TeamDataGrid' && (
+            {selectedType === 'CardGrid-2' && Title == 'BlogDataGrid' && (
                 <section id="section-team" className="page-section section bg-transparent m-0">
                     <div className="container clearfix">
                         <div className="heading-block center">
@@ -185,15 +178,18 @@ export default function TeamCard(props) {
                                         .map((teamItem, teamIndex) => (
                                             <div key={teamIndex} className="col-sm-12 col-md-6 col-lg-6 d-flex">
                                                 <div className="founder-box d-flex flex-column">
-                                                    <div className="founder-upper-box text-center">
-                                                        <img src={teamItem.ImageLink} alt="" />
-                                                    </div>
                                                     <div className="founder-description">
                                                         <h3 className="founder-title">{teamItem.Title}</h3>
-                                                        <div dangerouslySetInnerHTML={{ __html: teamItem.Designation }}></div>
                                                     </div>
-                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.About }}></div>
-                                                    <div className="mt-3">
+                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.ShortDescription }}></div>
+                                                    {teamItem.ComponentConfiguration != undefined && teamItem.ComponentConfiguration != null && teamItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                        <div className="card-box-actionBtn">
+                                                        <a href={`/SmartPage/${teamItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                <span>{teamItem.ComponentConfiguration.ComponentName}</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>)}
+                                                    {/* <div className="mt-3">
                                                         {section.SectionDesc.length - 1 === teamIndex && (
                                                             <div className="text-end founder-check-position-btn">
                                                                 <Link to="/careers#section-positions">
@@ -201,7 +197,7 @@ export default function TeamCard(props) {
                                                                 </Link>
                                                             </div>
                                                         )}
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         ))
@@ -211,7 +207,7 @@ export default function TeamCard(props) {
                     </div>
                 </section>
             )}
-            {selectedType === 'CardGrid-3' && Title == 'TeamDataGrid' && (
+            {selectedType === 'CardGrid-3' && Title == 'BlogDataGrid' && (
                 <section id="section-team" className="page-section section bg-transparent m-0">
                     <div className="container clearfix">
                         <div className="heading-block center">
@@ -239,15 +235,18 @@ export default function TeamCard(props) {
                                         .map((teamItem, teamIndex) => (
                                             <div key={teamIndex} className="col-sm-12 col-md-6 col-lg-4 d-flex">
                                                 <div className="founder-box d-flex flex-column">
-                                                    <div className="founder-upper-box text-center">
-                                                        <img src={teamItem.ImageLink} alt="" />
-                                                    </div>
                                                     <div className="founder-description">
                                                         <h3 className="founder-title">{teamItem.Title}</h3>
-                                                        <div dangerouslySetInnerHTML={{ __html: teamItem.Designation }}></div>
                                                     </div>
-                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.About }}></div>
-                                                    <div className="mt-3">
+                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.ShortDescription }}></div>
+                                                    {teamItem.ComponentConfiguration != undefined && teamItem.ComponentConfiguration != null && teamItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                        <div className="card-box-actionBtn">
+                                                            <a href={`/SmartPage/${teamItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                <span>{teamItem.ComponentConfiguration.ComponentName}</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>)}
+                                                    {/* <div className="mt-3">
                                                         {section.SectionDesc.length - 1 === teamIndex && (
                                                             <div className="text-end founder-check-position-btn">
                                                                 <Link to="/careers#section-positions">
@@ -255,7 +254,7 @@ export default function TeamCard(props) {
                                                                 </Link>
                                                             </div>
                                                         )}
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         ))
@@ -265,7 +264,7 @@ export default function TeamCard(props) {
                     </div>
                 </section>
             )}
-            {selectedType === 'CardGrid-4' && Title == 'TeamDataGrid' && (
+            {selectedType === 'CardGrid-4' && Title == 'BlogDataGrid' && (
                 <section id="section-team" className="page-section section bg-transparent m-0">
                     <div className="container clearfix">
                         <div className="heading-block center">
@@ -293,15 +292,18 @@ export default function TeamCard(props) {
                                         .map((teamItem, teamIndex) => (
                                             <div key={teamIndex} className="col-sm-12 col-md-6 col-lg-3 d-flex">
                                                 <div className="founder-box d-flex flex-column">
-                                                    <div className="founder-upper-box text-center">
-                                                        <img src={teamItem.ImageLink} alt="" />
-                                                    </div>
                                                     <div className="founder-description">
                                                         <h3 className="founder-title">{teamItem.Title}</h3>
-                                                        <div dangerouslySetInnerHTML={{ __html: teamItem.Designation }}></div>
                                                     </div>
-                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.About }}></div>
-                                                    <div className="mt-3">
+                                                    <div dangerouslySetInnerHTML={{ __html: teamItem.ShortDescription }}></div>
+                                                    {teamItem.ComponentConfiguration != undefined && teamItem.ComponentConfiguration != null && teamItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                        <div className="card-box-actionBtn">
+                                                        <a href={`/SmartPage/${teamItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                <span>{teamItem.ComponentConfiguration.ComponentName}</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>)}
+                                                    {/* <div className="mt-3">
                                                         {section.SectionDesc.length - 1 === teamIndex && (
                                                             <div className="text-end founder-check-position-btn">
                                                                 <Link to="/careers#section-positions">
@@ -309,7 +311,7 @@ export default function TeamCard(props) {
                                                                 </Link>
                                                             </div>
                                                         )}
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         ))

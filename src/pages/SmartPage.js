@@ -52,10 +52,10 @@ export default function SmartPage() {
             <div className="container clearfix">
               <div className="heading-block fancy-title border-bottom-0 title-bottom-border bottommargin-sm">
                 <h4>
-                  <strong>{smartPageContent.Title}</strong>
+                  <strong>{smartPageContent?.Title}</strong>
                 </h4>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: smartPageContent.PageContent }} />
+              <div dangerouslySetInnerHTML={{ __html: smartPageContent?.PageContent }} />
             </div>
           </section>
         </div>
