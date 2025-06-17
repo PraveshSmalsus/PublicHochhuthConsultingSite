@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-const ContactForm = ({ RequiredData }) => {
+const RequiredData="Contact Form"
+const ContactForm = (props) => {
     const [formData, setFormData] = useState({
-        firstName: '', 
+        firstName: '',
         lastName: '',
         email: '',
         country: '',
@@ -12,6 +12,7 @@ const ContactForm = ({ RequiredData }) => {
         agree: false,
         captcha: ''
     });
+    const Type = props?.Type;
     const [captchaText, setCaptchaText] = useState('');
     const [captchaError, setCaptchaError] = useState('');
 
@@ -35,7 +36,7 @@ const ContactForm = ({ RequiredData }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { firstName, lastName, country, email, comment } = formData;
-        const url = `https://hochhuth-consulting.de/HHHHPUBLICAPI/insertForm.php`;
+        const url = `https://testing.hochhuth-consulting.de/HHHHPUBLICAPI/insertForm.php`;
 
         try {
             const response = await fetch(url, {
@@ -79,7 +80,8 @@ const ContactForm = ({ RequiredData }) => {
     };
     return (
         <div id="wrapper" className="clearfix">
-            <Navbar />
+            {Type !='SmartPage' && (<Navbar />)}
+
             <section id="content">
                 <div className="content-wrap p-0">
                     <div id="section-contact" className="page-section section m-0 bg-color" style={{ padding: '80px 0', backgroundImage: 'linear-gradient(to bottom, #3D80E4 0%, #0a4bab 80%, #FFF 80%)' }}>
@@ -172,7 +174,8 @@ const ContactForm = ({ RequiredData }) => {
                     </div>
                 </div>
             </section>
-            <Footer />
+            {Type !='SmartPage' && (<Footer />)}
+
         </div>
     );
 };

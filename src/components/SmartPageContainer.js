@@ -47,6 +47,7 @@ const ReadMoreContent = ({ content }) => {
 export default function SmartPageContainer(props) {
   const PageTitle = props.PageTitle;
   const [smartPageContainerData, setSmartPageContainer] = useState([]);
+  const backgroundImageHeader = props.backgroundImageHeader;
 
   useEffect(() => {
     GetAllSmartMetaData('SmartMetaData');
@@ -126,9 +127,7 @@ export default function SmartPageContainer(props) {
         {smartPageContainerData?.length > 0 && smartPageContainerData.map((smartItem, index) => (
           smartItem?.SectionPart?.length > 0 && (
             <div key={index}>
-              {smartItem.SectionPart
-                .sort((a, b) => a.SortOrder - b.SortOrder) // Optionally sort each SectionPart by SortOrder if it has one
-                .map((section, secIndex) => (
+              {smartItem.SectionPart.map((section, secIndex) => (
                   section?.TemplateConfiguration && (
                     <div key={secIndex}>
                       <Containers
@@ -136,6 +135,7 @@ export default function SmartPageContainer(props) {
                         PageTitle={PageTitle}
                         Title={section?.TemplateConfiguration.Title}
                         selectedType={section?.TemplateConfiguration.selectedType}
+                        backgroundImageHeader={backgroundImageHeader}
                       />
                     </div>
                   )

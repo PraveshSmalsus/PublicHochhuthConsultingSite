@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getPublicServerData } from '../Service/GetDataApi';
 import * as CommonFunctions from '../Service/CommonFunctions';
+import BannerSlider from "../components/BannerSlider";
+import PageSubMenu from "../components/PageSubMenu";
 
 export default function FullContainer(props) {
     const PageTitle = props.PageTitle;
     const ContainerTitle = props.ContainerTitle;
     const selectedType = props.selectedType;
-
+    const backgroundImageHeader = props.backgroundImageHeader;
     const [FullContanerdata, setFullContanerdata] = useState([]);
 
     useEffect(() => {
@@ -49,6 +51,15 @@ export default function FullContainer(props) {
 
     return (
         <>
+             {
+                selectedType == 'BackgroundImage' && (<><BannerSlider
+                    id={PageTitle}
+                    PageTitle={PageTitle}
+                    ContainerTitle={backgroundImageHeader}
+                    urlRoute={`/${PageTitle}`}
+                    btn=""
+                    mainpage="mainpage" /></>)
+            }
             {selectedType == 'ImageAndContent' && (
                 <section id="section-benefits" className="page-section section m-0 pt-0 bg-transparent">
                     <div className="vertical-middle">
@@ -61,10 +72,10 @@ export default function FullContainer(props) {
                             <div className="row col-mb-50">
                                 <div className="col-sm-12 col-md-4 col-lg-5">
                                     <div className="benefit-img1">
-                                        <img src="https://hochhuth-consulting.de/images/benefit-img1.png" alt="" />
+                                        <img src="https://testing.hochhuth-consulting.de/images/benefit-img1.png" alt="" />
                                     </div>
                                     <div className="benefit-img1 upper-benefit-img">
-                                        <img src="https://hochhuth-consulting.de/images/benefit-img2.jpg" alt="" />
+                                        <img src="https://testing.hochhuth-consulting.de/images/benefit-img2.jpg" alt="" />
                                     </div>
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-7">

@@ -7,7 +7,7 @@ export const getPublicServerData = async (tableName) => {
         const payload = {
             table: `${tableName}`
         };
-        const response = await axios.post("https://www.political-risk.org/HHHHPUBLICAPI/getDataAll.php", payload, {
+        const response = await axios.post("https://testing.hochhuth-consulting.de/HHHHPUBLICAPI/getDataAll.php", payload, {
             headers: {
                 "Content-Type": "application/json"
             }

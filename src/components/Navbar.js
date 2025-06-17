@@ -48,16 +48,16 @@ export default function Navbar() {
               <Link
                 to="/home"
                 className="standard-logo"
-                data-dark-logo="https://hochhuth-consulting.de/images/logo.png"
+                data-dark-logo="https://testing.hochhuth-consulting.de/images/logo.png"
               >
-                <img src="https://hochhuth-consulting.de/images/logo.png" alt="Logo" />
+                <img src="https://testing.hochhuth-consulting.de/images/logo.png" alt="Logo" />
               </Link>
               <Link
                 to="/home"
                 className="retina-logo"
-                data-dark-logo="https://hochhuth-consulting.de/images/logo@2x.png"
+                data-dark-logo="https://testing.hochhuth-consulting.de/images/logo@2x.png"
               >
-                <img src="https://hochhuth-consulting.de/images/logo@2x.png" alt="Logo" />
+                <img src="https://testing.hochhuth-consulting.de/images/logo@2x.png" alt="Logo" />
               </Link>
             </div>
 

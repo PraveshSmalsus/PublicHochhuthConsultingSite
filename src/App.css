@@ -3,3 +3,35 @@
   margin: 0px;
   box-sizing: border-box;
 }
+.main-content {
+  padding-top: 16px;
+}
+
+.inner-wrapper {
+  width: 100%;
+}
+
+.title-section {
+  background-color: #1e3a8a; /* Matches the blue background in the image */
+  color: #ffffff; /* White text for the section */
+  padding-top: 64px;
+  padding-bottom: 32px;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title-container .section-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+  color: #ffffff; /* Explicitly set the h1 text color to white */
+}
+
+.description-text {
+  margin-top: 8px;
+  font-size: 16px;
+}

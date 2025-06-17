@@ -4,7 +4,9 @@ import HomePageSlider from './HomePageSlider';
 import FullContainer from './FullContainer';
 import DataGrid from './DataGrid';
 import TeamCard from './TeamCard';
+import BlogDataGrid from './BlogDataGrid';
 import Vacancies from './Vacancies';
+import ContactForm from '../pages/Contact';
 
 export default function Containers(props) {
     const ContainerTitle = props.ContainerTitle
@@ -20,8 +22,8 @@ export default function Containers(props) {
                 selectedType={selectedType}
             />)
             }
-             {
-                Title == 'BlogDataGrid' && (<DataGrid
+            {
+                Title == 'BlogDataGrid' && (<BlogDataGrid
                     ContainerTitle={ContainerTitle}
                     PageTitle={PageTitle}
                     Title={Title}
@@ -34,6 +36,7 @@ export default function Containers(props) {
                     PageTitle={PageTitle}
                     Title={Title}
                     selectedType={selectedType}
+                    backgroundImageHeader={props?.backgroundImageHeader}
                 />)
             }
             {
@@ -52,6 +55,12 @@ export default function Containers(props) {
                     selectedType={selectedType}
                 />)
             }
+
+            {
+                Title == 'Form' && (<ContactForm Type={"SmartPage"} />)
+            }
+
+
         </>
 
     );

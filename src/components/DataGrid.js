@@ -35,10 +35,11 @@ const ReadMoreContent = ({ content }) => {
         </div>
     );
 };
-let SmartPageData = []
-let containerListData = []
-let eventListData = []
+
 export default function DataGrid(props) {
+    let SmartPageData = []
+    let containerListData = []
+    let eventListData = []
     const GridTitle = props.ContainerTitle
     const PageTitle = props.PageTitle
     const selectedType = props.selectedType;
@@ -47,14 +48,16 @@ export default function DataGrid(props) {
     useEffect(() => {
         GetAllSmartMetaData('SmartMetaData');
     }, []);
-
+    function formatTitle(text) {
+        return text.replace(/-/g, ' ');
+    }
     const GetAllSmartMetaData = async (tableName) => {
         const smartdata = await getPublicServerData(tableName);
         const updatedSmartData = await Promise.all(
             smartdata.map(async (item) => {
                 item.SectionPart = [];
                 item.PageContainers = await CommonFunctions.parseJson(item.PageContainers);
-                if (item.Title.toLowerCase() === PageTitle.toLowerCase()) {
+                if (item.Title.toLowerCase() == formatTitle(PageTitle).toLowerCase()) {
                     return item;  // Return the item if it matches
                 }
                 return null;  // Return null if it doesn't match
@@ -68,7 +71,8 @@ export default function DataGrid(props) {
         const containerdata = await getPublicServerData(tableName);
         const updatedContainerData = await Promise.all(
             containerdata.map(async (item) => {
-                item.AdditionalContentSource = await CommonFunctions.parseJson(item.AdditionalContentSource);
+                item.AdditionalContentSource = await CommonFunctions.parseJson(item?.AdditionalContentSource);
+                item.ComponentConfiguration = await CommonFunctions.parseJson(item?.ComponentConfiguration);
                 return item;
             })
         );
@@ -100,7 +104,7 @@ export default function DataGrid(props) {
                         section.SectionDesc = [];
                         eventListData.forEach((eventItem) => {
                             if (section.Id == eventItem.id) {
-                                eventItem.hrefTitle= eventItem.Title.replace(/\s+/g, '-').toLowerCase();
+                                eventItem.hrefTitle = eventItem.Title.replace(/\s+/g, '-').toLowerCase();
                                 smartItem.SectionPart[0].SectionDesc.push(eventItem);
                             }
                         });
@@ -111,63 +115,14 @@ export default function DataGrid(props) {
         });
 
         setHomePageData(updatedHomePageData)
+        console.log(updatedHomePageData)
     };
 
     return (
         <>
-            {selectedType == 'CardGrid-3' && (
-                <section id="what-we-offer" className="page-section section bg-transparent">
-                    <div className="vertical-middle">
-                        <div className="container clearfix">
-                            <div className="heading-block center">
-                                {homePageData.map((smartItem, index) => (
-                                    smartItem.SectionPart?.length > 0 && (
-                                        <div key={index}>
-                                            {smartItem.SectionPart.map((section, secIndex) => (
-                                                <div key={secIndex}>
-                                                    <h2>{section.Title}</h2>
-                                                    <span>{section.SubHeading}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )
-                                ))}
-                            </div>
-                            <div className="row col-mb-50">
-                                {homePageData.map((smartItem, index) => (
-                                    smartItem.SectionPart?.length > 0 && smartItem.SectionPart.map((section, secIndex) => (
-                                        section.SectionDesc?.length > 0 &&
-                                        section.SectionDesc.sort((a, b) => (a.SortOrder || 0) - (b.SortOrder || 0))
-                                            .map((eventItem, eventIndex) => {
-                                                const { Title, Description } = eventItem;
-                                                return (
-                                                    <div key={eventIndex} className="col-sm-6 col-lg-4">
-                                                        <div className="feature-box fbox-plain" data-animate="fadeIn">
-                                                            <div className="fbox-icon">
-                                                                <span className="fbox-text">{`0${eventIndex + 1}`}</span>
-                                                            </div>
-                                                            <div className="fbox-content">
-                                                                <h3>
-                                                                    <a href="h" target="_blank" rel="noopener noreferrer">
-                                                                        {Title}
-                                                                    </a>
-                                                                </h3>
-                                                                <p dangerouslySetInnerHTML={{__html:Description}}></p>
-                                                                {/* <ReadMoreContent content={Description} /> */}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })
-                                    ))
-                                ))}
+           
 
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            )}
-            {selectedType == 'CardGrid-2' && Title.toLowerCase() == 'blogdatagrid' && (
+            {/* {selectedType == 'CardGrid-2' && Title.toLowerCase() == 'blogdatagrid' && (
                 <section
                     id="section-positions"
                     className="page-section section bg-transparent m-0"
@@ -223,6 +178,253 @@ export default function DataGrid(props) {
                                         ))
                                     ))}
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )} */}
+
+
+            
+            {selectedType === 'CardGrid-1' && Title == 'DataGrid' && (
+                <section id="what-we-offer" className="page-section section bg-transparent">
+                    <div className="vertical-middle">
+                        <div className="container clearfix">
+                            <div className="heading-block center">
+                                {homePageData?.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 && (
+                                        <div key={index}>
+                                            {smartItem.SectionPart.map((section, secIndex) => (
+                                                <div key={secIndex}>
+                                                    <h2>{section.Title}</h2>
+                                                    <span>{section.SubHeading}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                ))}
+                            </div>
+                            <div className="row col-mb-50">
+                                {homePageData.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 &&
+                                    smartItem.SectionPart.map((section, secIndex) => (
+                                        section.SectionDesc?.length > 0 &&
+                                        section.SectionDesc.sort((a, b) => (a.SortOrder || 0) - (b.SortOrder || 0)).map(
+                                            (eventItem, eventIndex) => {
+                                                const { Title, Description, ShortDescription } = eventItem;
+                                                return (
+                                                    <div key={eventIndex} className="col-sm-12 col-lg-12">
+                                                        <div className="feature-box fbox-plain" data-animate="fadeIn">
+                                                            <div className="fbox-icon">
+                                                                <span className="fbox-text">{`0${eventIndex + 1}`}</span>
+                                                            </div>
+                                                            <div className="fbox-content">
+                                                                <h3>
+                                                                    <a href="h" target="_blank" rel="noopener noreferrer">
+                                                                        {Title}
+                                                                    </a>
+                                                                </h3>
+                                                                <p dangerouslySetInnerHTML={{ __html: ShortDescription }}></p>
+                                                                {/* <ReadMoreContent content={Description} /> */}
+                                                                {eventItem.ComponentConfiguration != undefined && eventItem.ComponentConfiguration != null && eventItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                                <div className="card-box-actionBtn">
+                                                                <a href={`/SmartPage/${eventItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                        <span>{eventItem.ComponentConfiguration.ComponentName}</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        )
+                                    ))
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+            {selectedType === 'CardGrid-2' && Title == 'DataGrid' && (
+                <section id="what-we-offer" className="page-section section bg-transparent">
+                    <div className="vertical-middle">
+                        <div className="container clearfix">
+                            <div className="heading-block center">
+                                {homePageData?.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 && (
+                                        <div key={index}>
+                                            {smartItem.SectionPart.map((section, secIndex) => (
+                                                <div key={secIndex}>
+                                                    <h2>{section.Title}</h2>
+                                                    <span>{section.SubHeading}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                ))}
+                            </div>
+                            <div className="row col-mb-50">
+                                {homePageData.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 &&
+                                    smartItem.SectionPart.map((section, secIndex) => (
+                                        section.SectionDesc?.length > 0 &&
+                                        section.SectionDesc.sort((a, b) => (a.SortOrder || 0) - (b.SortOrder || 0)).map(
+                                            (eventItem, eventIndex) => {
+                                                const { Title, Description, ShortDescription } = eventItem;
+                                                return (
+                                                    <div key={eventIndex} className="col-sm-12 col-md-6 col-lg-6 d-flex">
+                                                        <div className="feature-box fbox-plain" data-animate="fadeIn">
+                                                            <div className="fbox-icon">
+                                                                <span className="fbox-text">{`0${eventIndex + 1}`}</span>
+                                                            </div>
+                                                            <div className="fbox-content">
+                                                                <h3>
+                                                                    <a href="h" target="_blank" rel="noopener noreferrer">
+                                                                        {Title}
+                                                                    </a>
+                                                                </h3>
+                                                                <p dangerouslySetInnerHTML={{ __html: ShortDescription }}></p>
+                                                                {eventItem.ComponentConfiguration != undefined && eventItem.ComponentConfiguration != null && eventItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                                <div className="card-box-actionBtn">
+                                                                <a href={`/SmartPage/${eventItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                        <span>{eventItem.ComponentConfiguration.ComponentName}</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            )}
+                                                                {/* <ReadMoreContent content={Description} /> */}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        )
+                                    ))
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+             {selectedType === 'CardGrid-3' && Title == 'DataGrid' && (
+                <section id="what-we-offer" className="page-section section bg-transparent">
+                    <div className="vertical-middle">
+                        <div className="container clearfix">
+                            <div className="heading-block center">
+                                {homePageData?.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 && (
+                                        <div key={index}>
+                                            {smartItem.SectionPart.map((section, secIndex) => (
+                                                <div key={secIndex}>
+                                                    <h2>{section.Title}</h2>
+                                                    <span>{section.SubHeading}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                ))}
+                            </div>
+                            <div className="row col-mb-50">
+                                {homePageData.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 &&
+                                    smartItem.SectionPart.map((section, secIndex) => (
+                                        section.SectionDesc?.length > 0 &&
+                                        section.SectionDesc.sort((a, b) => (a.SortOrder || 0) - (b.SortOrder || 0)).map(
+                                            (eventItem, eventIndex) => {
+                                                const { Title, Description, ShortDescription } = eventItem;
+                                                return (
+                                                    <div key={eventIndex} className="col-sm-12 col-md-6 col-lg-4 d-flex">
+                                                        <div className="feature-box fbox-plain" data-animate="fadeIn">
+                                                            <div className="fbox-icon">
+                                                                <span className="fbox-text">{`0${eventIndex + 1}`}</span>
+                                                            </div>
+                                                            <div className="fbox-content">
+                                                                <h3>
+                                                                    <a href="h" target="_blank" rel="noopener noreferrer">
+                                                                        {Title}
+                                                                    </a>
+                                                                </h3>
+                                                                <p dangerouslySetInnerHTML={{ __html: ShortDescription }}></p>
+                                                                {/* <ReadMoreContent content={Description} /> */}
+                                                                {eventItem.ComponentConfiguration != undefined && eventItem.ComponentConfiguration != null && eventItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                                <div className="card-box-actionBtn">
+                                                                <a href={`/SmartPage/${eventItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                        <span>{eventItem.ComponentConfiguration.ComponentName}</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        )
+                                    ))
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+              {selectedType === 'CardGrid-4' && Title == 'DataGrid' && (
+                <section id="what-we-offer" className="page-section section bg-transparent">
+                    <div className="vertical-middle">
+                        <div className="container clearfix">
+                            <div className="heading-block center">
+                                {homePageData?.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 && (
+                                        <div key={index}>
+                                            {smartItem.SectionPart.map((section, secIndex) => (
+                                                <div key={secIndex}>
+                                                    <h2>{section.Title}</h2>
+                                                    <span>{section.SubHeading}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                ))}
+                            </div>
+                            <div className="row col-mb-50">
+                                {homePageData.map((smartItem, index) => (
+                                    smartItem.SectionPart?.length > 0 &&
+                                    smartItem.SectionPart.map((section, secIndex) => (
+                                        section.SectionDesc?.length > 0 &&
+                                        section.SectionDesc.sort((a, b) => (a.SortOrder || 0) - (b.SortOrder || 0)).map(
+                                            (eventItem, eventIndex) => {
+                                                const { Title, Description ,ShortDescription } = eventItem;
+                                                return (
+                                                    <div key={eventIndex} className="col-sm-12 col-md-6 col-lg-3 d-flex">
+                                                        <div className="feature-box fbox-plain" data-animate="fadeIn">
+                                                            <div className="fbox-icon">
+                                                                <span className="fbox-text">{`0${eventIndex + 1}`}</span>
+                                                            </div>
+                                                            <div className="fbox-content">
+                                                                <h3>
+                                                                    <a href="h" target="_blank" rel="noopener noreferrer">
+                                                                        {Title}
+                                                                    </a>
+                                                                </h3>
+                                                                <p dangerouslySetInnerHTML={{ __html: ShortDescription }}></p>
+                                                                {/* <ReadMoreContent content={Description} /> */}
+                                                                {eventItem.ComponentConfiguration != undefined && eventItem.ComponentConfiguration != null && eventItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                                <div className="card-box-actionBtn">
+                                                                <a href={`/SmartPage/${eventItem.Title}`} className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                        <span>{eventItem.ComponentConfiguration.ComponentName}</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        )
+                                    ))
+                                ))}
                             </div>
                         </div>
                     </div>

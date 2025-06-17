@@ -17,12 +17,19 @@ export default function SmartPageEvents() {
 
   console.log(lastName); // "lastName"
 
+  // Function to decode URL string
+  function decodeURLString(encodedString) {
+    // return decodeURIComponent(encodedString);
+    const decoded = decodeURIComponent(encodedString);
+    return decoded.replace(/-/g, ' ');
+  }
+
   useEffect(() => {
     const GetAllSmartMetaData = async (tableName) => {
       const smartdata = await getPublicServerData(tableName);
       smartMetaDataItem = await Promise.all(
         smartdata.map(async (item) => {
-          if (item.Title.toLowerCase() === lastName.toLowerCase().replace(/-/g, ' ')) {
+          if (item.Title.toLowerCase() === decodeURLString(lastName).toLowerCase()) {
             return item;  // Return the item if it matches
           }
           return null;  // Return null if it doesn't match
@@ -39,16 +46,23 @@ export default function SmartPageEvents() {
   return (
     <div id="wrapper" className="clearfix">
       <Navbar />
+      <section id="main-content" className="main-content">
+      <div className="inner-wrapper">
+        <section className="title-section">
+          <div className="wrapper">
+            <div className="title-container">
+              <h1 className="section-title">{smartPageContent?.Title}</h1>
+            </div>
+            <div className="description-text">{smartPageContent?.SubHeading}</div>
+          </div>
+        </section>
+      </div>
+    </section>
       <section id="content" className="pt-4">
         <div className="content-wrap">
           <section className="page-section mt-0 section bg-transparent pt-0">
             <div className="container clearfix">
-              <div className="heading-block fancy-title border-bottom-0 title-bottom-border bottommargin-sm">
-                <h4>
-                  <strong>{smartPageContent.Title}</strong>
-                </h4>
-              </div>
-              <div dangerouslySetInnerHTML={{ __html: smartPageContent.Description }} />
+              <div dangerouslySetInnerHTML={{ __html: smartPageContent?.Description }} />
             </div>
           </section>
         </div>

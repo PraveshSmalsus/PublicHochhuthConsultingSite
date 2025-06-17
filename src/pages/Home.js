@@ -21,7 +21,7 @@ export default function Home(props) {
   const [backgroundImageHeader, setBackgroundImageHeader] = useState(null);
   const [containerListData, setContainerListData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [containerNottag, setcontainerNottagg] = useState(false);
+  const [containerNottag, setcontainerNottag] = useState(false);
 
   useEffect(() => {
     // Start fetching data on component mount
@@ -43,12 +43,14 @@ export default function Home(props) {
 
   // Function to decode URL string
   function decodeURLString(encodedString) {
-    return decodeURIComponent(encodedString);
+    // return decodeURIComponent(encodedString);
+    const decoded = decodeURIComponent(encodedString);
+    return decoded.replace(/-/g, ' ');
   }
 
   // Fetch smart meta data and filter by title
   const GetAllSmartMetaData = async (tableName) => {
-    setcontainerNottagg(false)
+    setcontainerNottag(false)
     pageFlag = false;
     const smartdata = await getPublicServerData(tableName);
     const updatedSmartData = await Promise.all(
@@ -56,7 +58,7 @@ export default function Home(props) {
         item.PageContainers = await CommonFunctions.parseJson(item.PageContainers);
         if (item.Title.toLowerCase() === decodeURLString(PageTitle).toLowerCase()) {
           if (item.PageContainers != undefined && item.PageContainers.length > 0) {
-            //setcontainerNottagg(true)
+            //setcontainerNottag(true)
             pageFlag = true;
           }
           return item;
@@ -93,7 +95,7 @@ export default function Home(props) {
         });
       });
     });
-    setcontainerNottagg(pageFlag);
+    setcontainerNottag(pageFlag);
     return backgroundImage;
   };
 
@@ -111,27 +113,29 @@ export default function Home(props) {
 <meta name="robots" content="index, follow" />
 <meta property="og:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
 <meta property="og:description" content="Partner with Hochhuth Consulting for expert solutions in digital transformation, project management, and business consulting." />
-<meta property="og:image" content="https://hochhuth-consulting.de/images/hochhuth-banner.jpg" />
-<meta property="og:url" content="https://hochhuth-consulting.de/" />
+<meta property="og:image" content="https://testing.hochhuth-consulting.de/images/hochhuth-banner.jpg" />
+<meta property="og:url" content="https://testing.hochhuth-consulting.de/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Hochhuth Consulting" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
 <meta name="twitter:description" content="Discover how Hochhuth Consulting can help your business thrive with expert consulting services in digital transformation and project management." />
-<meta name="twitter:image" content="https://hochhuth-consulting.de/images/hochhuth-banner.jpg" />
-<link rel="canonical" href="https://hochhuth-consulting.de/" />
+<meta name="twitter:image" content="https://testing.hochhuth-consulting.de/images/hochhuth-banner.jpg" />
+<link rel="canonical" href="https://testing.hochhuth-consulting.de/" />
     </Helmet>
       <Navbar />
       {containerNottag ? (
-        <><BannerSlider
+        <>
+        
+        {/* <BannerSlider
           id={PageTitle}
           PageTitle={PageTitle}
           ContainerTitle={backgroundImageHeader?.Title}
           urlRoute={`/${PageTitle}`}
           btn=""
-          mainpage="mainpage" />
-          <PageSubMenu />
-          <SmartPageContainer id={PageTitle} PageTitle={PageTitle} />
+          mainpage="mainpage" />*/}
+          {/* <PageSubMenu />  */}
+          <SmartPageContainer id={PageTitle} PageTitle={PageTitle} backgroundImageHeader={backgroundImageHeader?.Title}/>
           </>
       ):(<SmartPage/>)}
       <Footer />

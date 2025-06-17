@@ -17172,3 +17172,55 @@ section#section-howwework .row.bottommargin-lg.align-items-center{
 		font-size: 18px;
 	}
 }
+
+
+/*******SliderCss********/
+ 
+.carouselSlider .slick-prev, .carouselSlider .slick-next {
+	background-color: var(--primary-color);
+	border-color: transparent !important;
+	margin-left: 25px;
+	margin-right: 25px;
+	color: #fff;
+  }
+   
+  .carouselSlider,.carouselSlider .slick-prev:hover,.carouselSlider .slick-next:hover{
+	background-color: var(--secondary-color);
+  }
+   
+  .sliderDescription .container {
+	margin: 0 auto;
+	width: 100%;
+	height:430px;
+	border-color: white;
+  }
+   
+  .sliderDescription h2 {
+	font-family: "GrueneType";
+	  font-size: 44px;
+	  line-height: 1.3em;
+	font-weight: 900;
+	margin-bottom: 0;
+	color: #fff !important;
+  }
+  
+  .sliderDescription .subhead .html-content p {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	font-size: 30px !important;
+	font-weight: 900 !important;
+	font-family: "GrueneType" !important;
+	color: #fff !important;
+  }
+  .containerDetail{
+	position: relative;
+	transform: translate(0%, -50%);
+	top: 50%;
+	left: 0;
+	right: 0;
+  }
+  .slick-initialized .slick-slide {
+	position: relative;
+  }
+  
+   
