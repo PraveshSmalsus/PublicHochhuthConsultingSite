@@ -12,10 +12,10 @@ import SmartPageContainer from "../components/SmartPageContainer";
 import { Helmet } from 'react-helmet';
 
 let pageFlag;
-const baseUrl = window.location.origin;
+const baseUrl = "https://hochhuth-consulting.de";
 export default function Home(props) {
   const PageTitle = props.Title;
-  
+
 
   // State variables to store fetched data
   const [smartPageData, setSmartPageData] = useState([]);
@@ -106,39 +106,39 @@ export default function Home(props) {
 
   return (
     <div id="wrapper" className="clearfix">
-    <Helmet>
-<title>Hochhuth Consulting - Experts in Digital Transformation and Business Consulting</title>
-<meta name="description" content="Hochhuth Consulting specializes in digital transformation, agile project management, and business consulting. Partner with us to achieve your business goals." />
-<meta name="keywords" content="Hochhuth Consulting, digital transformation, business consulting, project management, IT consulting, agile consulting, business transformation, governance consulting" />
-<meta name="author" content="Hochhuth Consulting" />
-<meta name="robots" content="index, follow" />
-<meta property="og:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
-<meta property="og:description" content="Partner with Hochhuth Consulting for expert solutions in digital transformation, project management, and business consulting." />
-<meta property="og:image" content={`${baseUrl}/images/hochhuth-banner.jpg`} />
-<meta property="og:url"  content={`${baseUrl}/`} />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Hochhuth Consulting" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
-<meta name="twitter:description" content="Discover how Hochhuth Consulting can help your business thrive with expert consulting services in digital transformation and project management." />
-<meta name="twitter:image"  content={`${baseUrl}/images/hochhuth-banner.jpg`} />
-<link rel="canonical" href={baseUrl} />
-    </Helmet>
+      <Helmet>
+        <title>Hochhuth Consulting - Experts in Digital Transformation and Business Consulting</title>
+        <meta name="description" content="Hochhuth Consulting specializes in digital transformation, agile project management, and business consulting. Partner with us to achieve your business goals." />
+        <meta name="keywords" content="Hochhuth Consulting, digital transformation, business consulting, project management, IT consulting, agile consulting, business transformation, governance consulting" />
+        <meta name="author" content="Hochhuth Consulting" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
+        <meta property="og:description" content="Partner with Hochhuth Consulting for expert solutions in digital transformation, project management, and business consulting." />
+        <meta property="og:image" content={`${baseUrl}/images/hochhuth-banner.jpg`} />
+        <meta property="og:url" content={`${baseUrl}/`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Hochhuth Consulting" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Hochhuth Consulting - Experts in Digital Transformation and Business Consulting" />
+        <meta name="twitter:description" content="Discover how Hochhuth Consulting can help your business thrive with expert consulting services in digital transformation and project management." />
+        <meta name="twitter:image" content={`${baseUrl}/images/hochhuth-banner.jpg`} />
+        <link rel="canonical" href={baseUrl} />
+      </Helmet>
       <Navbar />
       {containerNottag ? (
         <>
-        
-        {/* <BannerSlider
+
+         <BannerSlider
           id={PageTitle}
           PageTitle={PageTitle}
           ContainerTitle={backgroundImageHeader?.Title}
           urlRoute={`/${PageTitle}`}
           btn=""
-          mainpage="mainpage" />*/}
+          mainpage="mainpage" />
           {/* <PageSubMenu />  */}
-          <SmartPageContainer id={PageTitle} PageTitle={PageTitle} backgroundImageHeader={backgroundImageHeader?.Title}/>
-          </>
-      ):(<SmartPage/>)}
+          <SmartPageContainer id={PageTitle} PageTitle={PageTitle} backgroundImageHeader={backgroundImageHeader?.Title} />
+        </>
+      ) : (<SmartPage />)}
       <Footer />
     </div>
   );

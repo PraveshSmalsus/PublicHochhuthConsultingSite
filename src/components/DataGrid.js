@@ -103,7 +103,7 @@ export default function DataGrid(props) {
                     .forEach((section) => {
                         section.SectionDesc = [];
                         eventListData.forEach((eventItem) => {
-                            if (section.Id == eventItem.id) {
+                            if (section.Title == eventItem.Title) {
                                 eventItem.hrefTitle = eventItem.Title.replace(/\s+/g, '-').toLowerCase();
                                 smartItem.SectionPart[0].SectionDesc.push(eventItem);
                             }

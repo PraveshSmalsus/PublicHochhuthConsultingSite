@@ -8,7 +8,7 @@ import { HashLink } from "react-router-hash-link";
 import SmartPageContainer from "../components/SmartPageContainer";
 
 export default function Career() {
-  const baseUrl = window.location.origin;
+  const baseUrl = "https://hochhuth-consulting.de";
   const PageTitle = "Careers at Hochhuth Consulting"; // Define the page title
 
   return (

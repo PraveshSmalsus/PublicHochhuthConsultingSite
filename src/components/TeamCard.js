@@ -101,7 +101,7 @@ export default function TeamCard(props) {
                                     <div className="row justify-content-center mb-0">
                                         <div className="col-md-8 bottommargin">
                                             <div className="border-bottom-0 text-justify bottommargin">
-                                                <div dangerouslySetInnerHTML={{ __html: section.About }} />
+                                                <div dangerouslySetInnerHTML={{ __html: section.Description }} />
                                             </div>
                                         </div>
                                     </div>
@@ -248,12 +248,13 @@ export default function TeamCard(props) {
                                                     </div>
                                                     <div dangerouslySetInnerHTML={{ __html: teamItem.About }}></div>
                                                     <div className="mt-3">
-                                                        {section.SectionDesc.length - 1 === teamIndex && (
-                                                            <div className="text-end founder-check-position-btn">
-                                                                <Link to="/careers#section-positions">
-                                                                    Check Open Positions
-                                                                </Link>
+                                                        {teamItem.ComponentConfiguration != undefined && teamItem.ComponentConfiguration != null && teamItem.ComponentConfiguration != '' && (<div className="text-end founder-check-position-btn">
+                                                            <div className="card-box-actionBtn">
+                                                                <a href="/careers#section-positions" className="button button-border button-rounded button-fill fill-from-right button-blue">
+                                                                    <span>Check Open Positions</span>
+                                                                </a>
                                                             </div>
+                                                        </div>
                                                         )}
                                                     </div>
                                                 </div>

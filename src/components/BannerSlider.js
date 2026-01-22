@@ -42,19 +42,19 @@ export default function BannerSlider(props) {
                 {item.Heading}
               </h2>
               <p className='animate__animated animate__fadeInUp' dangerouslySetInnerHTML={{ __html: item.SubHeading }} />
-              {item.ComponentConfiguration && item.ComponentConfiguration.length > 0 && item.ComponentConfiguration.map((itemcomp, index) => (
-                itemcomp.ComponentName && (
+              {item.ComponentConfiguration && (
+                item.ComponentConfiguration.ComponentName && (
                   <div key={index} className="text-center mt-0 mt-md-4">
                     <HashLink
-                      to={urlRoute}
+                      to="/careers#section-positions"
                       data-href="#section-positions"
                       className="button button-border button-rounded button-fill fill-from-right button-white m-0"
                     >
-                      <span>{itemcomp.ComponentName}</span>
+                      <span>{item.ComponentConfiguration.ComponentName}</span>
                     </HashLink>
                   </div>
                 )
-              ))}
+              )}
             </div>
           </div>
           <div className="bg-overlay-bg op-05"></div>

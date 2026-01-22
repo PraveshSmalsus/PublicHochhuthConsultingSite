@@ -5822,7 +5822,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 
 .slider-caption h2 {
 	text-align: center;
-font-size: 48px;
+font-size: 80px;
 font-family: 'Poppins', sans-serif;
 font-weight: 600;
 line-height: 140%;
@@ -16900,7 +16900,7 @@ text-transform: uppercase;
 }
 .card-box-actionBtn {
 	margin-top: 20px;
-	text-align: end;
+	text-align: center;
 }
 .card-box-actionBtn a.button.button-blue {
     border-radius: 4px;

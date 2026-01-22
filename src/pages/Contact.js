@@ -89,6 +89,7 @@ const ContactForm = (props) => {
                             <div className="row mx-auto dotted-bg" style={{ maxWidth: '740px' }}>
                                 <div className="col-md-12">
                                     <div className="center dark mb-5">
+                                        <h1 class="text-white heading-lg">CONTACT FORM</h1>
                                         <h2 className="font-weight-bold mb-2 text-white">{RequiredData?.Heading}</h2>
                                     </div>
                                     <div className="card bg-white shadow-lg border-0">

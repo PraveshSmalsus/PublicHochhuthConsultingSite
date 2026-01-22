@@ -3,7 +3,7 @@ import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import { getPublicServerData } from '../Service/GetDataApi'
 export default function Navbar() {
-  const baseUrl = window.location.origin;
+  const baseUrl = "https://hochhuth-consulting.de/";
   const [scrolled, setScrolled] = useState(false);
   const [navigations, setNavigations] = useState([]);
   const handleScroll = () => {

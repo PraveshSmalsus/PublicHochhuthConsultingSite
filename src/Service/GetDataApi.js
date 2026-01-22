@@ -1,7 +1,7 @@
 import axios from 'axios';
-const currentPageUrl = window.location.pathname;
+const currentPageUrl = "https://hochhuth-consulting.de";
 console.log(currentPageUrl)
-const baseUrl = window.location.origin;
+const baseUrl = "https://hochhuth-consulting.de";
 export const getPublicServerData = async (tableName) => {
     let results = [];
     try {

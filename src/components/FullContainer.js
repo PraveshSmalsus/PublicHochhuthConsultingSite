@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getPublicServerData } from '../Service/GetDataApi';
 import * as CommonFunctions from '../Service/CommonFunctions';
-import BannerSlider from "../components/BannerSlider";
-import PageSubMenu from "../components/PageSubMenu";
 
 export default function FullContainer(props) {
     const PageTitle = props.PageTitle;
     const ContainerTitle = props.ContainerTitle;
     const selectedType = props.selectedType;
-    const backgroundImageHeader = props.backgroundImageHeader;
+
     const [FullContanerdata, setFullContanerdata] = useState([]);
 
     useEffect(() => {
@@ -51,15 +49,6 @@ export default function FullContainer(props) {
 
     return (
         <>
-            {
-                selectedType == 'BackgroundImage' && (<><BannerSlider
-                    id={PageTitle}
-                    PageTitle={PageTitle}
-                    ContainerTitle={backgroundImageHeader}
-                    urlRoute={`/${PageTitle}`}
-                    btn=""
-                    mainpage="mainpage" /></>)
-            }
             {selectedType == 'ImageAndContent' && (
                 <section id="section-benefits" className="page-section section m-0 pt-0 bg-transparent">
                     <div className="vertical-middle">
@@ -71,11 +60,12 @@ export default function FullContainer(props) {
                             </div>
                             <div className="row col-mb-50">
                                 <div className="col-sm-12 col-md-4 col-lg-5">
-                                    {FullContanerdata.map((item, index) => (
-                                        <div className="benefit-img1">
-                                            <img src={item.ItemCover} alt="" />
-                                        </div>
-                                    ))}
+                                    <div className="benefit-img1">
+                                        <img src="images/benefit-img1.png" alt="" />
+                                    </div>
+                                    <div className="benefit-img1 upper-benefit-img">
+                                        <img src="images/benefit-img2.jpg" alt="" />
+                                    </div>
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-7">
                                     {FullContanerdata.map((item, index) => (
@@ -123,12 +113,19 @@ export default function FullContainer(props) {
                             {FullContanerdata.map((item, index) => {
                                 return <><h2 key={index}>{item.Title}</h2><span>
                                     {item.SubHeading}
-                                    <a href="mailto:info@hochhuth-consulting.de">
-                                        info@hochhuth-consulting.de
-                                    </a>
                                 </span>
                                 </>;
                             })}
+                            <div className="row justify-content-center mb-0">
+                                <div className="col-md-8 bottommargin">
+                                    <div className="border-bottom-0  text-justify bottommargin">
+                                        {FullContanerdata.map((item, index) => {
+                                            return <div dangerouslySetInnerHTML={{ __html: item?.Description }} />;
+                                        })}
+
+                                    </div>
+                                </div>
+                            </div>
                             <a
                                 href="/contact"
                                 className="mt-4 button button-border button-rounded button-fill fill-from-right button-blue"

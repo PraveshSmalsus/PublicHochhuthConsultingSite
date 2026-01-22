@@ -1,5 +1,5 @@
 import axios from 'axios';
-const currentPageUrl = window.location.pathname;
+const currentPageUrl = "https://hochhuth-consulting.de/";
 console.log(currentPageUrl)
 export const parseJson = async (jsonString) => {
     if (jsonString && jsonString.trim() !== "") {

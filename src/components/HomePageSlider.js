@@ -156,7 +156,7 @@ export default function HomePageSlider(props) {
             .forEach((section) => {
               section.SectionDesc = [];
               teamListData.forEach((teamItem) => {
-                if (section.Id == teamItem.id) {
+                if (section.Title == teamItem.Title) {
                   // Prevent pushing duplicates to SectionDesc
                   if (!smartItem.SectionPart[0].SectionDesc.some(item => item.id == teamItem.id)) {
                     smartItem.SectionPart[0].SectionDesc.push(teamItem);

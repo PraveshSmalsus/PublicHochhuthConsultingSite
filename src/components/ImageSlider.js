@@ -66,7 +66,7 @@ export default function TeamCard(props) {
                     .forEach((section) => {
                         section.SectionDesc = [];
                         teamListData.forEach((teamItem) => {
-                            if (section.Id == teamItem.id) {
+                            if (section.Title == teamItem.Title) {
                                 smartItem.SectionPart[0].SectionDesc.push(teamItem);
                             }
                         });

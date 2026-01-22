@@ -72,7 +72,7 @@ export default function BlogDataGrid(props) {
                         section.SectionDesc = [];
                         eventListData.forEach(async (eventItem) => {
                             eventItem.ComponentConfiguration = await CommonFunctions.parseJson(eventItem?.ComponentConfiguration);
-                            if (section.Id == eventItem.id) {
+                            if (section.Title == eventItem.Title) {
                                 eventItem.hrefTitle = eventItem.Title.replace(/\s+/g, '-').toLowerCase();
                                 smartItem.SectionPart[0].SectionDesc.push(eventItem);
                             }
@@ -151,23 +151,27 @@ export default function BlogDataGrid(props) {
                 </section>
             )}
             {selectedType === 'CardGrid-2' && Title == 'BlogDataGrid' && (
-                <section id="section-team" className="page-section section bg-transparent m-0">
+                <section id="section-positions" className="page-section section bg-transparent m-0">
                     <div className="container clearfix">
-                        <div className="heading-block center">
-                            {homePageData?.map((smartItem, index) =>
-                                smartItem.SectionPart?.length > 0 && (
-                                    <div key={index}>
-                                        {smartItem.SectionPart?.map((section, secIndex) => (
-                                            <div key={secIndex}>
-                                                <h2>{section.Title}</h2>
-                                                <span>{section.SubHeading}</span>
-                                            </div>
-                                        ))}
+                        {homePageData?.map((smartItem, index) =>
+                            smartItem.SectionPart?.length > 0 &&
+                            smartItem.SectionPart.map((section, secIndex) => (
+                                <React.Fragment key={`${index}-${secIndex}`}>
+                                    <div className="heading-block center">
+                                        <h2>{section.Heading}</h2>
+                                        <span>{section.SubHeading}</span>
                                     </div>
-                                )
-                            )}
-                        </div>
-                        <div className="row justify-content-center col-mb-50 mb-0 mt-6">
+                                    <div className="row justify-content-center mb-0">
+                                        <div className="col-md-8 bottommargin">
+                                            <div className="border-bottom-0 text-justify bottommargin">
+                                                <div dangerouslySetInnerHTML={{ __html: section.Description }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            ))
+                        )}
+                        <div className="row justify-content-center col-mb-50 mb-0">
                             {homePageData?.map((smartItem, index) =>
                                 smartItem.SectionPart?.length > 0 &&
                                 smartItem.SectionPart.map((section, secIndex) =>
